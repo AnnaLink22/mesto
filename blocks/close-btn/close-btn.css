@@ -1,0 +1,39 @@
+.close-btn {
+  background-image: url('../../images/close.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 57px;
+  height: 57px;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+
+
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
+/*
+@media screen and (min-width: 1439px) {
+  .close-btn {
+    margin: -50px 0 0 630px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .close-btn {
+    margin: -50px 0 0 420px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .photo-grid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 12px;
+    width: calc(100% - 32px);
+    padding-top: 64px;
+  }
+}
