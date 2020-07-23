@@ -17,3 +17,16 @@
 .close-btn:hover {
   opacity: 0.6;
 }
+
+
+@media screen and (max-width: 321px) {
+  .close-btn {
+    position: relative;
+    top: -35px;
+    left: 30px;
+    width: 47px;
+    height: 47px;
+  }
+}
+
+
