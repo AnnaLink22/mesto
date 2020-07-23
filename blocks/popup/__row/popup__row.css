@@ -3,6 +3,5 @@
   flex-direction: row;
   justify-content: space-between;
   width: calc(100% - 72px);
-  position: relative;
   margin-left: 36px;
 }

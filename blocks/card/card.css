@@ -15,6 +15,14 @@
 
 @media screen and (max-width: 1023px) {
   .card {
-  min-height: 300px;
+  min-height: 280px;
   }
 }
+
+
+@media screen and (max-width: 870px) {
+  .card {
+  min-height: 250px;
+  }
+}
+

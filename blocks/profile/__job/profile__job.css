@@ -15,8 +15,15 @@
 
 
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 880px) {
   .profile__job {
-    font-size: 12px;
+    font-size: 14px;
+  }
+}
+
+
+@media screen and (max-width: 620px) {
+  .profile__job {
+    text-align: center;
   }
 }

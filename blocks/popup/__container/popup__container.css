@@ -1,6 +1,6 @@
 .popup__container {
   margin: 0 auto;
-  width: calc(100vw - 850px);
+  width: 430px;
   min-height: 330px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -8,8 +8,15 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 1024px) {
+
+@media screen and (max-width: 530px) {
   .popup__container {
-    width: calc(100vw - 594px);
+    width: 330px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .popup__container {
+    width: 230px;
   }
 }

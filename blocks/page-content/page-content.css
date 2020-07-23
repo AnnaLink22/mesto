@@ -4,3 +4,9 @@
   margin: 0 auto;
   padding-top: 45px;
 }
+
+@media screen and (max-width: 321px) {
+  .page-content {
+    padding-top: 28px;
+  }
+}

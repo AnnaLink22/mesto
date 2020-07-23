@@ -2,3 +2,9 @@
   width: 69%;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 530px) {
+  .content {
+    width: calc(100% - 40px);
+  }
+}
