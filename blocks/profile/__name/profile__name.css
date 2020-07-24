@@ -3,6 +3,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: white;
   padding: 0 0 16px;
+  max-width: 320px;
   margin: 0;
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
@@ -20,6 +21,12 @@
     font-size: 27px;
     line-height: 2;
     padding-bottom: 0;
+  }
+}
+@media screen and (max-width: 730px) {
+  .profile__name {
+    max-width: 205px;
+    text-align: center;
   }
 }
 

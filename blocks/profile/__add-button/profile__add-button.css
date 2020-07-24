@@ -1,5 +1,5 @@
-.add-button {
-  background-image: url('../../images/plus.png');
+.profile__add-button {
+  background-image: url('../../../images/plus.svg');
   background-position: center;
   background-repeat: no-repeat;
   box-sizing: border-box;
@@ -11,17 +11,22 @@
   align-self: center;
 }
 
-.add-button:hover {
+.profile__add-button:hover {
   opacity: 0.6;
 }
 
 
 
 @media screen and (max-width: 900px) {
-  .add-button {
+  .profile__add-button {
     width: 100%;
     height: 50px;
     margin-top: 36px;
   }
 }
 
+@media screen and (max-width: 400px) {
+  .profile__add-button {
+    background-image: url('../../../images/plus320.svg');
+  }
+}

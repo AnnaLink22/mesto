@@ -1,4 +1,4 @@
-.save-btn {
+.popup__save-btn {
   width: calc(100% - 72px);
   box-sizing: border-box;
   border: none;
@@ -16,6 +16,6 @@
   margin: 0 auto 37px;
 }
 
-.save-btn:hover {
+.popup__save-btn:hover {
   opacity: 0.8;
 }

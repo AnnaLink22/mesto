@@ -1,5 +1,5 @@
-.close-btn {
-  background-image: url('../../images/close.svg');
+.popup__close-btn {
+  background-image: url('../../../images/close.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -14,13 +14,13 @@
   left: 80px;
 }
 
-.close-btn:hover {
+.popup__close-btn:hover {
   opacity: 0.6;
 }
 
 
 @media screen and (max-width: 321px) {
-  .close-btn {
+  .popup__close-btn {
     position: relative;
     top: -35px;
     left: 30px;
