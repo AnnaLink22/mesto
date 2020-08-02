@@ -9,9 +9,9 @@
   padding: 0;
   box-sizing: border-box;
   border: none;
-  position: relative;
-  top: -45px;
-  left: 80px;
+  position: absolute;
+  top: -50px;
+  right: -50px;
 }
 
 .popup__close-btn:hover {
@@ -21,11 +21,10 @@
 
 @media screen and (max-width: 321px) {
   .popup__close-btn {
-    position: relative;
+    width: 45px;
+    height: 45px;
     top: -35px;
-    left: 30px;
-    width: 47px;
-    height: 47px;
+    right: -35px;
   }
 }
 

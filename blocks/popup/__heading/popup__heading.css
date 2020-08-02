@@ -1,19 +1,19 @@
 .popup__heading {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: calc(100% - 72px);
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
   text-align: left;
-  margin: 34px auto 54px;
   width: 100%;
+  margin: 0 0 54px;
 }
 
 @media screen and (max-width: 420px) {
   .popup__heading {
     font-size: 18px;
+    margin-bottom: 36px;
   }
 }
 
