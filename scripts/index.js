@@ -57,14 +57,15 @@ const openPic = (evt) => {
 
 const getCard = (name, link) => {
   const cards = cardTemplate.content.cloneNode(true);
+  const cardPic = cards.querySelector('.card__pic');
   cards.querySelector('.card__name').textContent = name;
-  cards.querySelector('.card__pic').alt = name;
-  cards.querySelector('.card__pic').src = link;
+  cardPic.alt = name;
+  cardPic.src = link;
   cards.querySelector('.card__like-button').addEventListener('click', handleLike);
   cards.querySelector('.card__delete').addEventListener('click', (evt) => {
     evt.target.closest('.card').remove();
   });
-  cards.querySelector('.card__pic').addEventListener('click', openPic);
+  cardPic.addEventListener('click', openPic);
   return cards;
 };
 
