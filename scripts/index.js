@@ -3,11 +3,9 @@
 
 const editButton = document.querySelector('.profile__edit-button');
 
-const popup = document.querySelectorAll('.popup');
+const popupInfo = document.querySelector('.popup_type_info');
 
-const popupInfo = document.querySelector('.popup_info');
-
-const popupNewPic = document.querySelector('.popup_new-pic');
+const popupNewPic = document.querySelector('.popup_type_new-pic');
 
 const addPic = document.querySelector('.profile__add-button');
 
@@ -27,33 +25,6 @@ const profileJob = document.querySelector('.profile__job');
 
 const cardGrid = document.querySelector('.card-grid');
 
-
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 const namePicInput = document.querySelector('.popup__input_text_pic');
 
 const linkPicInput = document.querySelector('.popup__input_text_link');
@@ -62,7 +33,7 @@ const formNewPic = document.querySelector('.form_new-pic');
 
 const cardTemplate = document.querySelector('.card__template');
 
-const popupOpenPic = document.querySelector('.popup__pic');
+const popupOpenPic = document.querySelector('.popup_type_pic');
 
 const openPicLink = document.querySelector('.popup__pic-open');
 
@@ -84,46 +55,28 @@ const openPic = (evt) => {
 }
 
 
-const getCard = data => {
+const getCard = (name, link) => {
   const cards = cardTemplate.content.cloneNode(true);
-  const cardPic = cards.querySelector('.card__pic');
-  cards.querySelector('.card__name').innerText = data.name;
-  cardPic.src = data.link;
-  cardPic.alt = data.name;
-  const likeBtn = cards.querySelector('.card__like-button');
-  likeBtn.addEventListener('click', handleLike);
-  const deleteBtn = cards.querySelector('.card__delete');
-  deleteBtn.addEventListener('click', (evt) => {
+  cards.querySelector('.card__name').textContent = name;
+  cards.querySelector('.card__pic').alt = name;
+  cards.querySelector('.card__pic').src = link;
+  cards.querySelector('.card__like-button').addEventListener('click', handleLike);
+  cards.querySelector('.card__delete').addEventListener('click', (evt) => {
     evt.target.closest('.card').remove();
   });
-  cardPic.addEventListener('click', openPic);
+  cards.querySelector('.card__pic').addEventListener('click', openPic);
   return cards;
 };
 
-const renderList = () => {
-  const allCards = initialCards.map(el => getCard(el));
-  cardGrid.append(...allCards);
+
+initialCards.forEach( addCard = (item) => {
+  cardGrid.append(getCard(item.name, item.link));
+});
+
+
+const addNewCard = () => {
+  cardGrid.prepend(getCard(namePicInput.value, linkPicInput.value));
 };
-
-renderList();
-
-const addNewCard = (namePicInput, linkPicInput) => {
-  const newCards = cardTemplate.content.cloneNode(true);
-  const newPic = newCards.querySelector('.card__pic');
-  newCards.querySelector('.card__name').textContent = namePicInput.value;
-  newPic.src = linkPicInput.value;
-  newPic.alt = namePicInput.value;
-  const newLikeBtn = newCards.querySelector('.card__like-button');
-  newLikeBtn.addEventListener('click', handleLike);
-  const deleteBtnNew = newCards.querySelector('.card__delete');
-  deleteBtnNew.addEventListener('click', (evt) => {
-    evt.target.closest('.card').remove();
-  });
-  newPic.addEventListener('click', openPic);
-  cardGrid.prepend(newCards);
-};
-
-
 
 
 const SubmitHandlerNewCard = (evt) => {
@@ -136,10 +89,6 @@ const SubmitHandlerNewCard = (evt) => {
 
 
 const togglePopup = (anyPopup) => {
-  if (anyPopup.classList.contains('popup_info')) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-  }
   anyPopup.classList.toggle('popup_opened');
 };
 
@@ -161,7 +110,11 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 formNewPic.addEventListener('submit', SubmitHandlerNewCard);
 
-editButton.addEventListener('click', () => togglePopup(popupInfo));
+editButton.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  togglePopup(popupInfo)
+});
 
 closeButton.addEventListener('click', () => togglePopup(popupInfo));
 
