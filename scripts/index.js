@@ -70,7 +70,7 @@ const getCard = (name, link) => {
 };
 
 
-initialCards.forEach( addCard = (item) => {
+initialCards.forEach(addCard = (item) => {
   cardGrid.append(getCard(item.name, item.link));
 });
 
@@ -102,19 +102,37 @@ const formSubmitHandler = (evt) => {
 };
 
 
+const handleEsc = (evt) => {
+  evt.preventDefault();
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    togglePopup(openedPopup);
+  };
+}
+
 
 // EVENTLISTENERS
 
+document.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  if (evt.target.classList.contains('popup') && evt.target.classList.contains('popup_opened')) {
+    togglePopup(evt.target);
+  }
+})
 
+
+document.addEventListener('keydown', (evt) => {
+  handleEsc(evt);
+});
 
 formElement.addEventListener('submit', formSubmitHandler);
 
 formNewPic.addEventListener('submit', SubmitHandlerNewCard);
 
 editButton.addEventListener('click', () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  togglePopup(popupInfo)
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+    togglePopup(popupInfo)
 });
 
 closeButton.addEventListener('click', () => togglePopup(popupInfo));
@@ -124,5 +142,3 @@ closeNewPicButton.addEventListener('click', () => togglePopup(popupNewPic));
 addPic.addEventListener('click', () => togglePopup(popupNewPic));
 
 closePicBtn.addEventListener('click', () => togglePopup(popupOpenPic));
-
-
