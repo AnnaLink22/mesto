@@ -13,11 +13,11 @@ const closeButton = document.querySelector('.popup_info-btn');
 
 const closeNewPicButton = document.querySelector('.popup_new-pic-btn');
 
-const formElement = document.querySelector('.popup__form');
+const formInfo = document.querySelector('.popup__form_type_info');
 
-const nameInput = formElement.querySelector('.popup__input_text_name');
+const nameInput = formInfo.querySelector('.popup__input_text_name');
 
-const jobInput = formElement.querySelector('.popup__input_text_job');
+const jobInput = formInfo.querySelector('.popup__input_text_job');
 
 const profileName = document.querySelector('.profile__name');
 
@@ -29,7 +29,7 @@ const namePicInput = document.querySelector('.popup__input_text_pic');
 
 const linkPicInput = document.querySelector('.popup__input_text_link');
 
-const formNewPic = document.querySelector('.form_new-pic');
+const formNewPic = document.querySelector('.popup__form__type_new-pic');
 
 const cardTemplate = document.querySelector('.card__template');
 
@@ -40,6 +40,14 @@ const openPicLink = document.querySelector('.popup__pic-open');
 const closePicBtn = document.querySelector('.popup_close-pic-btn');
 
 const openPicSubtitle = document.querySelector('.popup__subtitle');
+
+const inputsInfo = Array.from(popupInfo.querySelectorAll('.popup__input'));
+
+const buttonInfo = popupInfo.querySelector('.popup__button');
+
+const inputsNewPic = Array.from(popupNewPic.querySelectorAll('.popup__input'));
+
+const buttonNewPic = popupNewPic.querySelector('.popup__button');
 
 // FUNCTIONS
 
@@ -80,15 +88,6 @@ const addNewCard = () => {
 };
 
 
-const SubmitHandlerNewCard = (evt) => {
-  evt.preventDefault();
-  addNewCard(namePicInput, linkPicInput);
-  linkPicInput.value = '';
-  namePicInput.value = '';
-  togglePopup(popupNewPic);
-};
-
-
 const togglePopup = (anyPopup) => {
   anyPopup.classList.toggle('popup_opened');
 };
@@ -102,43 +101,53 @@ const formSubmitHandler = (evt) => {
 };
 
 
-const handleEsc = (evt) => {
+const SubmitHandlerNewCard = (evt) => {
+  evt.preventDefault();
+  addNewCard(namePicInput, linkPicInput);
+  linkPicInput.value = '';
+  namePicInput.value = '';
+  togglePopup(popupNewPic);
+};
+
+
+
+// EVENTLISTENERS
+
+
+
+formInfo.addEventListener('submit', formSubmitHandler);
+
+formNewPic.addEventListener('submit', SubmitHandlerNewCard);
+
+document.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') && evt.target.classList.contains('popup_opened')) {
+    togglePopup(evt.target);
+  }
+});
+
+
+document.addEventListener('keyup', (evt) => {
   evt.preventDefault();
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     togglePopup(openedPopup);
   };
-}
-
-
-// EVENTLISTENERS
-
-document.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  if (evt.target.classList.contains('popup') && evt.target.classList.contains('popup_opened')) {
-    togglePopup(evt.target);
-  }
-})
-
-
-document.addEventListener('keydown', (evt) => {
-  handleEsc(evt);
 });
-
-formElement.addEventListener('submit', formSubmitHandler);
-
-formNewPic.addEventListener('submit', SubmitHandlerNewCard);
 
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    togglePopup(popupInfo)
+    toggleButtonState(inputsInfo, buttonInfo);
+    togglePopup(popupInfo);
 });
 
 closeButton.addEventListener('click', () => togglePopup(popupInfo));
 
 closeNewPicButton.addEventListener('click', () => togglePopup(popupNewPic));
 
-addPic.addEventListener('click', () => togglePopup(popupNewPic));
+addPic.addEventListener('click', () => {
+  toggleButtonState(inputsNewPic, buttonNewPic);
+  togglePopup(popupNewPic);
+});
 
 closePicBtn.addEventListener('click', () => togglePopup(popupOpenPic));

@@ -1,0 +1,15 @@
+.popup__error {
+  margin: 5px 0 13px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  color: #FF0000;
+  min-height: 15px;
+  visibility: hidden;
+}

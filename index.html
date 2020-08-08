@@ -35,10 +35,14 @@
       <div class="popup__container">
         <button type="button" class="popup__close-btn popup_info-btn"></button>
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form action="#" name="popup-info" class="popup__form">
-          <input required type="text" name="popup-name" value="" class="popup__input popup__input_text_name">
-          <input required type="text" name="popup-job" value="" class="popup__input popup__input_text_job">
-          <button type="submit" class="popup__save-btn">Сохранить</button>
+        <form action="#" name="popup-info" class="popup__form popup__form_type_info" novalidate>
+          <fieldset class="popup__form-set">
+            <input required minlength="2" maxlength="40" type="text" id='popup-name' name="popup-name" value="" class="popup__input popup__input_text_name">
+            <span class="popup__error" id='popup-name-error'></span>
+            <input required minlength="2" maxlength="200" type="text" id='popup-job' name="popup-job" value="" class="popup__input popup__input_text_job">
+            <span class="popup__error" id='popup-job-error'></span>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </fieldset>
         </form>
       </div>
     </div>
@@ -48,10 +52,14 @@
           <h3 class="popup__heading">Новое место</h3>
           <button type="button" class="popup__close-btn popup_new-pic-btn"></button>
         </div>
-        <form action="#" name="popup-new-pic" class="popup__form form_new-pic">
-          <input required type="text" name="popup-pic-name" value="" placeholder="Название" class="popup__input popup__input_text_pic">
-          <input required type="text" name="popup-link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
-          <button type="submit" class="popup__save-btn popup_save-pic-btn">Создать</button>
+        <form action="#" name="popup-new-pic" class="popup__form popup__form__type_new-pic" novalidate>
+          <fieldset class="popup__form-set">
+            <input required minlength="1" maxlength="30" type="text" id='popup-pic-name' name="popup-pic-name" value="" placeholder="Название" class="popup__input popup__input_text_pic">
+            <span class="popup__error" id='popup-pic-name-error'></span>
+            <input required type="url" id='popup-link' name="popup-link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
+            <span class="popup__error" id='popup-link-error'></span>
+            <button type="submit" class="popup__button popup_save-pic-btn">Создать</button>
+          </fieldset>
         </form>
       </div>
     </div>
@@ -78,6 +86,7 @@
     </li>
   </template>
   <script src="./scripts/initial-cards.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
