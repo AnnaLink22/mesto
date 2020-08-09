@@ -103,11 +103,12 @@ const isPopupOpened = (anyPopup) => {
 
 
 const addEscHandler = () => {
-  document.addEventListener('keydown', handleEsc);
+  document.addEventListener('keyup', handleEsc);
 };
 
 const deleteEscHandler = () => {
-  document.removeEventListener('keydown', handleEsc);
+  document.removeEventListener('keyup', handleEsc);
+  console.log('hey');
 };
 
 
