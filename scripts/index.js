@@ -64,17 +64,17 @@ const openPic = (evt) => {
 
 
 const getCard = (name, link) => {
-  const cards = cardTemplate.content.cloneNode(true);
-  const cardPic = cards.querySelector('.card__pic');
-  cards.querySelector('.card__name').textContent = name;
+  const card = cardTemplate.content.cloneNode(true);
+  const cardPic = card.querySelector('.card__pic');
+  card.querySelector('.card__name').textContent = name;
   cardPic.alt = name;
   cardPic.src = link;
-  cards.querySelector('.card__like-button').addEventListener('click', handleLike);
-  cards.querySelector('.card__delete').addEventListener('click', (evt) => {
+  card.querySelector('.card__like-button').addEventListener('click', handleLike);
+  card.querySelector('.card__delete').addEventListener('click', (evt) => {
     evt.target.closest('.card').remove();
   });
   cardPic.addEventListener('click', openPic);
-  return cards;
+  return card;
 };
 
 
@@ -88,8 +88,36 @@ const addNewCard = () => {
 };
 
 
+
+const handleEsc = (evt) => {
+  evt.preventDefault();
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    togglePopup(openedPopup);
+  }
+};
+
+const isPopupOpened = (anyPopup) => {
+  return anyPopup.classList.contains('popup_opened');
+}
+
+
+const addEscHandler = () => {
+  document.addEventListener('keydown', handleEsc);
+};
+
+const deleteEscHandler = () => {
+  document.removeEventListener('keydown', handleEsc);
+};
+
+
 const togglePopup = (anyPopup) => {
   anyPopup.classList.toggle('popup_opened');
+  if (isPopupOpened(anyPopup)) {
+    addEscHandler();
+  } else {
+    deleteEscHandler();
+  };
 };
 
 
@@ -126,28 +154,22 @@ document.addEventListener('click', (evt) => {
 });
 
 
-document.addEventListener('keyup', (evt) => {
-  evt.preventDefault();
-  const openedPopup = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    togglePopup(openedPopup);
-  };
-});
-
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    toggleButtonState(inputsInfo, buttonInfo);
+    toggleButtonState(inputsInfo, buttonInfo, 'popup__button_disabled');
     togglePopup(popupInfo);
 });
 
 closeButton.addEventListener('click', () => togglePopup(popupInfo));
 
-closeNewPicButton.addEventListener('click', () => togglePopup(popupNewPic));
+closeNewPicButton.addEventListener('click',  () => togglePopup(popupNewPic));
+
 
 addPic.addEventListener('click', () => {
-  toggleButtonState(inputsNewPic, buttonNewPic);
+  toggleButtonState(inputsNewPic, buttonNewPic, 'popup__button_disabled');
   togglePopup(popupNewPic);
 });
+
 
 closePicBtn.addEventListener('click', () => togglePopup(popupOpenPic));
