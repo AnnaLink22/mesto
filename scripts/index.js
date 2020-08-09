@@ -108,7 +108,6 @@ const addEscHandler = () => {
 
 const deleteEscHandler = () => {
   document.removeEventListener('keyup', handleEsc);
-  console.log('hey');
 };
 
 
