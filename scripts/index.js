@@ -1,5 +1,9 @@
-// CONSTANTS
+import {Card} from './Card.js'
+import {initialCards} from './initial-cards.js'
+import {validationSelectors} from './FormValidator.js'
+import {FormValidator} from './FormValidator.js'
 
+// CONSTANTS
 
 const editButton = document.querySelector('.profile__edit-button');
 
@@ -31,8 +35,6 @@ const linkPicInput = document.querySelector('.popup__input_text_link');
 
 const formNewPic = document.querySelector('.popup__form__type_new-pic');
 
-const cardTemplate = document.querySelector('.card__template');
-
 const popupOpenPic = document.querySelector('.popup_type_pic');
 
 const openPicLink = document.querySelector('.popup__pic-open');
@@ -51,11 +53,7 @@ const buttonNewPic = popupNewPic.querySelector('.popup__button');
 
 // FUNCTIONS
 
-const handleLike = (evt) => {
-  evt.target.classList.toggle('card__like-button_liked');
-};
-
-const openPic = (evt) => {
+export const openPic = (evt) => {
   openPicLink.src = evt.target.src;
   openPicLink.alt = evt.target.alt;
   openPicSubtitle.textContent = evt.target.alt;
@@ -63,31 +61,16 @@ const openPic = (evt) => {
 }
 
 
-const getCard = (name, link) => {
-  const card = cardTemplate.content.cloneNode(true);
-  const cardPic = card.querySelector('.card__pic');
-  card.querySelector('.card__name').textContent = name;
-  cardPic.alt = name;
-  cardPic.src = link;
-  card.querySelector('.card__like-button').addEventListener('click', handleLike);
-  card.querySelector('.card__delete').addEventListener('click', (evt) => {
-    evt.target.closest('.card').remove();
-  });
-  cardPic.addEventListener('click', openPic);
-  return card;
-};
-
-
-initialCards.forEach(addCard = (item) => {
-  cardGrid.append(getCard(item.name, item.link));
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, '.card__template');
+  cardGrid.append(card.generateCard());
 });
 
 
 const addNewCard = () => {
-  cardGrid.prepend(getCard(namePicInput.value, linkPicInput.value));
+  const newCard = new Card(namePicInput.value, linkPicInput.value, '.card__template');
+  cardGrid.prepend(newCard.generateCard());
 };
-
-
 
 const handleEsc = (evt) => {
   evt.preventDefault();
@@ -138,10 +121,7 @@ const SubmitHandlerNewCard = (evt) => {
 };
 
 
-
 // EVENTLISTENERS
-
-
 
 formInfo.addEventListener('submit', formSubmitHandler);
 
@@ -157,7 +137,6 @@ document.addEventListener('click', (evt) => {
 editButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    toggleButtonState(inputsInfo, buttonInfo, 'popup__button_disabled');
     togglePopup(popupInfo);
 });
 
@@ -166,10 +145,15 @@ closeButton.addEventListener('click', () => togglePopup(popupInfo));
 closeNewPicButton.addEventListener('click',  () => togglePopup(popupNewPic));
 
 
-addPic.addEventListener('click', () => {
-  toggleButtonState(inputsNewPic, buttonNewPic, 'popup__button_disabled');
-  togglePopup(popupNewPic);
-});
+addPic.addEventListener('click', () => togglePopup(popupNewPic));
 
 
 closePicBtn.addEventListener('click', () => togglePopup(popupOpenPic));
+
+
+const formInfoValid = new FormValidator(validationSelectors, formInfo);
+const popupNewPicValid = new FormValidator(validationSelectors, formNewPic);
+
+formInfoValid.enableValidation();
+popupNewPicValid.enableValidation();
+
