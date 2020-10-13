@@ -3,6 +3,7 @@ import {openPicLink} from '../src/index.js';
 import {openPicSubtitle} from '../src/index.js';
 
 export const openPic = (name, link) => {
+  console.log(openPicLink);
   openPicLink.src = link.src;
   openPicLink.alt = name;
   openPicSubtitle.textContent = name;
