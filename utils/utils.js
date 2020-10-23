@@ -3,7 +3,7 @@ import {openPicLink} from '../src/index.js';
 import {openPicSubtitle} from '../src/index.js';
 
 export const openPic = (name, link) => {
-  openPicLink.src = link.src;
+  openPicLink.src = link;
   openPicLink.alt = name;
   openPicSubtitle.textContent = name;
   togglePopup(popupOpenPic);
