@@ -46,13 +46,7 @@ const linkPicInput = document.querySelector('.popup__input_text_link');
 
 const formNewPic = document.querySelector('.popup__form__type_new-pic');
 
-export const openPicLink = document.querySelector('.popup__pic-open');
 
-export const openPicSubtitle = document.querySelector('.popup__subtitle');
-
-export const popupOpenPic = document.querySelector('.popup_type_pic');
-
-const closePicBtn = document.querySelector('.popup_close-pic-btn');
 
 
 
@@ -60,13 +54,13 @@ const closePicBtn = document.querySelector('.popup_close-pic-btn');
 
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link);
+  const card = new Card(item.name, item.link, '.card__template');
   cardGrid.append(card.generateCard());
 });
 
 
 const addNewCard = () => {
-  const newCard = new Card(namePicInput.value, linkPicInput.value);
+  const newCard = new Card(namePicInput.value, linkPicInput.value, '.card__template');
   cardGrid.prepend(newCard.generateCard());
 };
 
@@ -80,9 +74,9 @@ const formSubmitHandler = (evt) => {
 };
 
 
-const SubmitHandlerNewCard = (evt) => {
+const submitHandlerNewCard = (evt) => {
   evt.preventDefault();
-  addNewCard(namePicInput, linkPicInput);
+  addNewCard(namePicInput, linkPicInput, '.card__template');
   linkPicInput.value = '';
   namePicInput.value = '';
   togglePopup(popupNewPic);
@@ -93,7 +87,7 @@ const SubmitHandlerNewCard = (evt) => {
 
 formInfo.addEventListener('submit', formSubmitHandler);
 
-formNewPic.addEventListener('submit', SubmitHandlerNewCard);
+formNewPic.addEventListener('submit', submitHandlerNewCard);
 
 document.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') && evt.target.classList.contains('popup_opened')) {
@@ -116,7 +110,6 @@ closeNewPicButton.addEventListener('click',  () => togglePopup(popupNewPic));
 addPic.addEventListener('click', () => togglePopup(popupNewPic));
 
 
-closePicBtn.addEventListener('click', () => togglePopup(popupOpenPic));
 
 
 const formInfoValid = new FormValidator(validationSelectors, formInfo);

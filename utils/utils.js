@@ -1,12 +1,21 @@
-import {popupOpenPic} from '../src/index.js';
-import {openPicLink} from '../src/index.js';
-import {openPicSubtitle} from '../src/index.js';
 
-export const openPic = (name, link) => {
-  openPicLink.src = link;
-  openPicLink.alt = name;
-  openPicSubtitle.textContent = name;
-  togglePopup(popupOpenPic);
+const popupImg = document.querySelector('.popup__pic-opened');
+
+const popupSubtitle = document.querySelector('.popup__subtitle');
+
+const popupWithPic = document.querySelector('.popup_type_pic');
+
+const closePicBtn = popupWithPic.querySelector('.popup__close-btn');
+
+
+closePicBtn.addEventListener('click', () => togglePopup(popupWithPic));
+
+
+export const openPopupWithPic = (name, link) => {
+  popupImg.src = link;
+  popupImg.alt = name;
+  popupSubtitle.textContent = name;
+  togglePopup(popupWithPic);
 };
 
 

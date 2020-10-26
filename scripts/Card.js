@@ -1,14 +1,14 @@
-import {openPic} from '../utils/utils.js';
+import {openPopupWithPic} from '../utils/utils.js';
 
 export class Card {
-  constructor(name, link) {
+  constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
+    this._cardSelector = cardSelector;
   }
   _getTemplate() {
     const cardElement = document
-      .querySelector('.card__template')
-      .content
+      .querySelector(this._cardSelector).content
       .querySelector('.card')
       .cloneNode(true);
 
@@ -29,7 +29,7 @@ export class Card {
       this._element = null;
   });
     this._element.querySelector('.card__pic').addEventListener('click', () => {
-      openPic(this._name, this._link);
+      openPopupWithPic(this._name, this._link);
     });
 };
 
