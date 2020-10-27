@@ -7,7 +7,6 @@ const popupWithPic = document.querySelector('.popup_type_pic');
 
 const closePicBtn = popupWithPic.querySelector('.popup__close-btn');
 
-
 closePicBtn.addEventListener('click', () => togglePopup(popupWithPic));
 
 
