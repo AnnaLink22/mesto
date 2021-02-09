@@ -4,19 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 
 <body>
   <div class="page">
     <header class="header">
-      <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+      <img src="<%=require('../images/logo.svg')%>" alt="Логотип" class="header__logo">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__column">
-          <img src="./images/kusto.jpg" alt="Фото" class="profile__pic">
+          <img src="<%=require('../images/kusto.jpg')%>" alt="Фото" class="profile__pic">
           <div class="profile__info-column">
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -37,9 +36,9 @@
         <h3 class="popup__heading">Редактировать профиль</h3>
         <form action="#" name="popup-info" class="popup__form popup__form_type_info" novalidate>
           <fieldset class="popup__form-set">
-            <input required minlength="2" maxlength="40" type="text" id='popup-name' name="popup-name" value="" class="popup__input popup__input_text_name">
+            <input required minlength="2" maxlength="40" type="text" id='popup-name' name="name" value="" class="popup__input popup__input_text_name">
             <span class="popup__error" id='popup-name-error'></span>
-            <input required minlength="2" maxlength="200" type="text" id='popup-job' name="popup-job" value="" class="popup__input popup__input_text_job">
+            <input required minlength="2" maxlength="200" type="text" id='popup-job' name="job" value="" class="popup__input popup__input_text_job">
             <span class="popup__error" id='popup-job-error'></span>
             <button type="submit" class="popup__button">Сохранить</button>
           </fieldset>
@@ -54,9 +53,9 @@
         </div>
         <form action="#" name="popup-new-pic" class="popup__form popup__form__type_new-pic" novalidate>
           <fieldset class="popup__form-set">
-            <input required minlength="1" maxlength="30" type="text" id='popup-pic-name' name="popup-pic-name" value="" placeholder="Название" class="popup__input popup__input_text_pic">
+            <input required minlength="1" maxlength="30" type="text" id='popup-pic-name' name="name" value="" placeholder="Название" class="popup__input popup__input_text_pic">
             <span class="popup__error" id='popup-pic-name-error'></span>
-            <input required type="url" id='popup-link' name="popup-link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
+            <input required type="url" id='popup-link' name="link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
             <span class="popup__error" id='popup-link-error'></span>
             <button type="submit" class="popup__button popup_save-pic-btn">Создать</button>
           </fieldset>
@@ -85,7 +84,6 @@
       </div>
     </li>
   </template>
-  <script type="module" src="./src/index.js"></script>
 </body>
 </html>
 

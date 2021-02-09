@@ -1,10 +1,9 @@
-import {openPopupWithPic} from '../utils/utils.js';
-
 export class Card {
-  constructor(name, link, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(data, cardSelector, handleCardClick) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -29,7 +28,7 @@ export class Card {
       this._element = null;
   });
     this._element.querySelector('.card__pic').addEventListener('click', () => {
-      openPopupWithPic(this._name, this._link);
+      this._handleCardClick({name:this._name, link: this._link});
     });
 };
 
