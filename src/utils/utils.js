@@ -25,7 +25,7 @@ const profileName = document.querySelector('.profile__name');
 
 const profileJob = document.querySelector('.profile__job');
 
-const formNewPic = document.querySelector('.popup__form__type_new-pic');
+const formNewPic = document.querySelector('.popup__form_type_new-pic');
 
 const popupImg = document.querySelector('.popup__pic-opened');
 

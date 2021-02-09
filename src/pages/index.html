@@ -32,7 +32,7 @@
     </main>
     <div class="popup popup_type_info">
       <div class="popup__container">
-        <button type="button" class="popup__close-btn popup_info-btn"></button>
+        <button type="button" class="popup__close-btn"></button>
         <h3 class="popup__heading">Редактировать профиль</h3>
         <form action="#" name="popup-info" class="popup__form popup__form_type_info" novalidate>
           <fieldset class="popup__form-set">
@@ -49,15 +49,15 @@
       <div class="popup__container">
         <div class="popup__row">
           <h3 class="popup__heading">Новое место</h3>
-          <button type="button" class="popup__close-btn popup_new-pic-btn"></button>
+          <button type="button" class="popup__close-btn"></button>
         </div>
-        <form action="#" name="popup-new-pic" class="popup__form popup__form__type_new-pic" novalidate>
+        <form action="#" name="popup-new-pic" class="popup__form popup__form_type_new-pic" novalidate>
           <fieldset class="popup__form-set">
             <input required minlength="1" maxlength="30" type="text" id='popup-pic-name' name="name" value="" placeholder="Название" class="popup__input popup__input_text_pic">
             <span class="popup__error" id='popup-pic-name-error'></span>
             <input required type="url" id='popup-link' name="link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
             <span class="popup__error" id='popup-link-error'></span>
-            <button type="submit" class="popup__button popup_save-pic-btn">Создать</button>
+            <button type="submit" class="popup__button">Создать</button>
           </fieldset>
         </form>
       </div>
