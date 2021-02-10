@@ -1,3 +1,4 @@
+
 // CONSTANTS
 
 const validationSelectors =
@@ -31,4 +32,7 @@ const popupImg = document.querySelector('.popup__pic-opened');
 
 const popupSubtitle = document.querySelector('.popup__subtitle');
 
-export {validationSelectors, editButton, addPic, formInfo, nameInput, jobInput, profileName, profileJob, formNewPic, popupImg, popupSubtitle};
+const escape = 'Escape';
+
+
+export {validationSelectors, editButton, addPic, formInfo, nameInput, jobInput, profileName, profileJob, formNewPic, popupImg, popupSubtitle, escape};

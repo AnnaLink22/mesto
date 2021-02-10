@@ -12,8 +12,13 @@ export class Section {
     });
   }
 
-  addItem(element) {
-    this._container.append(element);
+  addItem(element, isNewCard) {
+    if (isNewCard) {
+      this._container.prepend(element);
+    } else {
+      this._container.append(element);
+    }
+
   }
 }
 

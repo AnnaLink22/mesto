@@ -1,23 +1,25 @@
+import {escape} from '../utils/utils.js';
+
 export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this._handleEscClose = this._handleEscClose.bind(this);
+  }
+
+  _handleEscClose(evt) {
+    if (evt.key === escape) {
+      this.closePopup();
+    }
   }
 
   openPopup() {
     this._popup.classList.add('popup_opened');
-    document.addEventListener('keyup', (evt) => {this._handleEscClose(evt)});
+    document.addEventListener('keydown', this._handleEscClose.bind(this));
   }
 
   closePopup() {
     this._popup.classList.remove('popup_opened');
-    document.removeEventListener('keyup', (evt) => {this._handleEscClose(evt)});
-  }
-
-  _handleEscClose(evt) {
-      evt.preventDefault();
-      if (evt.key === 'Escape') {
-        this.closePopup();
-      }
+    document.removeEventListener('keydown', this._handleEscClose.bind(this));
   }
 
 

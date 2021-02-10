@@ -19,23 +19,39 @@ import './index.css';
 const userInfo = new UserInfo(profileName, profileJob);
 userInfo.setUserInfo(profileName.textContent, profileJob.textContent);
 
+const handleCardClick = (data) => {
+  popupPic.openPopup(data.name, data.link);
+};
 
 
-
-const InitialCardsSection = new Section({ items: initialCards, renderer:
-(item) => {
-  const card = new Card(item, '.card__template', (item) => {
-    const popupPic = new PopupWithImage('.popup_type_pic', item.name, item.link);
-    popupPic.setEventListeners();
-    popupPic.openPopup();
-  })
+const createCard = (data) => {
+  const card = new Card(data, '.card__template', (data) => {handleCardClick(data)});
   const cardElement = card.generateCard();
-  InitialCardsSection.addItem(cardElement);
+  return cardElement;
+};
+
+
+
+
+const popupPic = new PopupWithImage('.popup_type_pic');
+popupPic.setEventListeners();
+
+
+const initialCardsSection = new Section({ items: initialCards, renderer:
+(item) => {
+  initialCardsSection.addItem(createCard(item));
   }
 }, '.card-grid' );
 
-InitialCardsSection.renderItems();
+initialCardsSection.renderItems();
 
+
+
+const popupAddNewPic = new PopupWithForm('.popup_type_new-pic', (data) => {
+  initialCardsSection.addItem(createCard(data), true);
+  }
+);
+popupAddNewPic.setEventListeners();
 
 
 const popupInfo = new PopupWithForm('.popup_type_info', (data) => {
@@ -45,20 +61,6 @@ const popupInfo = new PopupWithForm('.popup_type_info', (data) => {
 );
 popupInfo.setEventListeners();
 
-
-const popupNewPic = new PopupWithForm('.popup_type_new-pic', (data) => {
-    const newCard = new Card(data, '.card__template', (data) => {
-      const popupNewImg = new PopupWithImage('.popup_type_pic', data.name, data.link);
-      popupNewImg.setEventListeners();
-      popupNewImg.openPopup();
-    })
-    const newCardEl = newCard.generateCard();
-    InitialCardsSection.addItem(newCardEl);
-    }
-);
-
-
-popupNewPic.setEventListeners();
 
 
 
@@ -75,7 +77,7 @@ editButton.addEventListener('click', () => {
 });
 
 
-addPic.addEventListener('click', () => popupNewPic.openPopup());
+addPic.addEventListener('click', () => {popupAddNewPic.openPopup()});
 
 
 const formInfoValid = new FormValidator(validationSelectors, formInfo);

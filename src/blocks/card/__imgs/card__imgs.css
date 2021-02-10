@@ -1,5 +1,29 @@
 .card__imgs {
   position: relative;
+  height: 282px;
 }
 
 
+@media screen and (max-width: 1250px) {
+  .card__imgs {
+    height: 223px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .card__imgs {
+    height: 171px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card__imgs {
+    height: 464px;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .card__imgs {
+    height: 280px;
+  }
+}
