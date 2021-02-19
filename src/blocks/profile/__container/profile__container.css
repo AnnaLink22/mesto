@@ -1,0 +1,38 @@
+.profile__container {
+  margin-right: 30px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+
+@media screen and (max-width: 620px) {
+  .profile__container {
+   margin: 0 auto 20px;
+  }
+}
+
+.profile__container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:  rgba(0, 0, 0, 0.8);
+  opacity: 0;
+}
+.profile__container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../../images/pencil.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+}
+
+.profile__container:hover::before,
+.profile__container:hover::after { opacity: 1; }

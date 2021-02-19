@@ -18,7 +18,6 @@ export class Section {
     } else {
       this._container.append(element);
     }
-
   }
 }
 

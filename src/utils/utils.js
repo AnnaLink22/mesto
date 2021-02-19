@@ -22,11 +22,9 @@ const nameInput = formInfo.querySelector('.popup__input_text_name');
 
 const jobInput = formInfo.querySelector('.popup__input_text_job');
 
-const profileName = document.querySelector('.profile__name');
-
-const profileJob = document.querySelector('.profile__job');
-
 const formNewPic = document.querySelector('.popup__form_type_new-pic');
+
+const formAvatar = document.querySelector('.popup__form_type_avatar');
 
 const popupImg = document.querySelector('.popup__pic-opened');
 
@@ -34,5 +32,14 @@ const popupSubtitle = document.querySelector('.popup__subtitle');
 
 const escape = 'Escape';
 
+const profilePic = document.querySelector('.profile__pic');
 
-export {validationSelectors, editButton, addPic, formInfo, nameInput, jobInput, profileName, profileJob, formNewPic, popupImg, popupSubtitle, escape};
+const editAvatar = document.querySelector('.profile__container');
+
+
+const updateAvatar = (link) => {
+  profilePic.src = link;
+}
+
+
+export {validationSelectors, editButton, addPic, formInfo, nameInput, jobInput, formNewPic, formAvatar, popupImg, popupSubtitle, escape, updateAvatar, editAvatar};
