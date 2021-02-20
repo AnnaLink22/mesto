@@ -5,7 +5,7 @@ import {UserInfo} from '../components/UserInfo.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithSubmit} from '../components/PopupWithSubmit.js';
-import {validationSelectors, editButton, addPic, formInfo, nameInput, jobInput, formNewPic, formAvatar, updateAvatar, editAvatar} from '../utils/utils.js';
+import {validationSelectors, editButton, addPic, formInfo, formNewPic, formAvatar, editAvatar, nameInput, jobInput} from '../utils/utils.js';
 import {Api} from '../components/Api.js';
 import './index.css';
 
@@ -27,14 +27,9 @@ const api = new Api({
 })
 
 
-const updateInfo = (data) => {
-  const userInfo = new UserInfo(data.name, data.about);
-  userInfo.setUserInfo(data.name, data.about);
-  userInfo.updateUserInfo();
-  nameInput.value = data.name;
-  jobInput.value = data.about;
-  updateAvatar(data.avatar);
-};
+const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__pic');
+
+
 
 api
   .getInfo()
@@ -43,7 +38,7 @@ api
   })
   .then((item) => {
     userId = item._id;
-    updateInfo(item);
+    userInfo.setUserInfo(item);
   })
   .catch((err) => {console.log(err)}
 );
@@ -56,7 +51,7 @@ const popupInfo = new PopupWithForm('.popup_type_info', (data) => {
       api
       .saveUserInfo(data.name, data.job)
       .then((info) => {
-        updateInfo(info);
+        userInfo.setUserInfo(info);
       })
       .catch((err) => {console.log(err)})
       .finally(() => {
@@ -67,7 +62,11 @@ const popupInfo = new PopupWithForm('.popup_type_info', (data) => {
 popupInfo.setEventListeners();
 
 
-
+const cardsSection = new Section( (item) => {
+  cardsSection.addItem(createCard(item));
+  }
+  , '.card-grid'
+);
 
 api
   .getAllCards()
@@ -75,12 +74,7 @@ api
     const newData = data.map((item) => {
       return {name: item.name, link: item.link, _id: item._id, likes: item.likes, ownerId: item.owner._id};
     })
-    const initialCardsSection = new Section({ items: newData, renderer:
-      (item) => {
-        initialCardsSection.addItem(createCard(item));
-        }
-      }, '.card-grid' );
-    initialCardsSection.renderItems();
+    cardsSection.renderItems(newData);
   })
   .catch((err) => {console.log(err)
 });
@@ -110,7 +104,7 @@ const popupAvatar = new PopupWithForm('.popup_type_avatar', (data) => {
     api
     .editAvatar(data.avatar)
     .then((item) => {
-      updateAvatar(item.avatar);
+      userInfo.setUserInfo(item);
     })
     .catch(err => console.log(err))
     .finally(() => {
@@ -118,6 +112,7 @@ const popupAvatar = new PopupWithForm('.popup_type_avatar', (data) => {
     })
   }, 300)
 })
+
 popupAvatar.setEventListeners();
 editAvatar.addEventListener('click', () => {popupAvatar.openPopup()});
 
@@ -130,8 +125,7 @@ const popupAddNewPic = new PopupWithForm('.popup_type_new-pic', (data) => {
         return {name: item.name, link: item.link, _id: item._id, likes: item.likes, ownerId: item.owner._id};
       })
     .then((data) => {
-      const newCardsSection = new Section({ items: {}, }, '.card-grid');
-      newCardsSection.addItem(createCard(data), true)
+      cardsSection.addItem(createCard(data), true)
     })
     .catch(err => console.log(err))
     .finally(() => {
@@ -146,6 +140,9 @@ popupAddNewPic.setEventListeners();
 
 
 editButton.addEventListener('click', () => {
+  const getUserInfo = userInfo.getUserInfo();
+  nameInput.value = getUserInfo.name;
+  jobInput.value = getUserInfo.job;
   popupInfo.openPopup();
 });
 

@@ -4,7 +4,8 @@ export class Card {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes.length;
+    this._likesNumber = data.likes.length;
+    this._likes = data.likes;
     this._id = data._id;
     this._userId = userId;
     this._api = api;
@@ -30,7 +31,7 @@ export class Card {
     this._api
     .addLike(this._id)
     .then((item) => {
-      this.updateLikes(item.likes.length);
+      this.updateLikesNumber(item.likes.length);
     })
     .catch((err) => {console.log(err)});
   }
@@ -40,7 +41,7 @@ export class Card {
     this._api
     .deleteLike(this._id)
     .then((item) => {
-      this.updateLikes(item.likes.length);
+      this.updateLikesNumber(item.likes.length);
     })
     .catch((err) => {console.log(err)});
   }
@@ -56,11 +57,11 @@ export class Card {
     const likeBtn = this._element.querySelector('.card__like-button');
     likeBtn.addEventListener('click', () => {
       if (likeBtn.classList.contains('card__like-button_liked')) {
-        likeBtn.classList.remove('card__like-button_liked');
         this._deleteLike();
+        likeBtn.classList.remove('card__like-button_liked');
       } else {
-        likeBtn.classList.add('card__like-button_liked');
         this._handleLike();
+        likeBtn.classList.add('card__like-button_liked');
       }
     });
     this._element.querySelector('.card__delete').addEventListener('click', () => {
@@ -78,7 +79,20 @@ export class Card {
   };
 
 
-  updateLikes(likes) {
+
+  updateLikes() {
+    const likesOwners = this._likes.map((item) => {
+      return {ownersId: item._id};
+    })
+    likesOwners.forEach(item => {
+      if (item.ownersId === this._userId) {
+        this._element.querySelector('.card__like-button').classList.add('card__like-button_liked');
+      }
+    });
+  }
+
+
+  updateLikesNumber(likes) {
     this._element.querySelector('.card__like-numbers').textContent = likes;
   }
 
@@ -90,7 +104,8 @@ export class Card {
     this._elementPic = this._element.querySelector('.card__pic');
     this._elementPic.alt = this._name;
     this._elementPic.src = this._link;
-    this.updateLikes(this._likes);
+    this.updateLikesNumber(this._likesNumber);
+    this.updateLikes();
     return this._element;
   };
 
